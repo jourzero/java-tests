@@ -1,5 +1,7 @@
 #!/bin/bash
-export CLASSPATH=".:lib/commons-collections-3.2.2/commons-collections-3.2.2.jar"
+export CLASSPATH="/usr/local/openjdk-8/jre/lib/:."
+export CLASSPATH="$CLASSPATH:lib/commons-collections-4-4.4"
+export CLASSPATH="$CLASSPATH:lib/commons-collections-3.2.2"
 set -x
 javac Employee.java
 javac SerializeDemo.java  
@@ -9,5 +11,5 @@ set +x
 
 for filename in data/*.bin;do
     echo "-- Deserializing $filename..."
-    java DeserializeDemo "$filename"
+    java -cp $CLASSPATH DeserializeDemo "$filename"
 done
